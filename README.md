@@ -64,17 +64,35 @@ Azure Data Factory (V2) · Azure Databricks (Premium, serverless) · Unity Catal
 
 ## Evidence
 
-Screenshots documenting actual execution are in [`docs/screenshots/`](docs/screenshots/):
+Screenshots documenting actual execution:
 
-| File | Shows |
-|---|---|
-| `01_adf_pipeline_success.png` | ADF pipeline `pl_healthcare_lakehouse` run, Output tab — `run_healthcare_pipeline` activity Succeeded |
-| `02_databricks_job_run.png` | Databricks Workflow `healthcare_lakehouse_job` run — all 3 tasks (`bronze_ingest`, `silver_transform`, `gold_aggregate`) succeeded, total duration 3m 21s, running on serverless compute |
-| `03_deidentification_columns.png` | Output of `patients_scd2.columns` — confirms `SSN`, `FIRST`, `LAST`, `ADDRESS`, `DRIVERS`, `PASSPORT`, `MAIDEN`, `BIRTHPLACE`, `ZIP` are absent from the de-identified table |
-| `04_gold_output.png` | Sample rows from `condition_prevalence` — top result "Medication review due (situation)" at 8,858 occurrences across the population |
-| `05_referential_integrity.png` | Referential integrity validation — 0 orphaned records across all 6 child tables, full 1,180-patient dataset. Captured on Databricks Free Edition while validating the transform logic prior to Azure deployment; the identical logic (including these same assertion checks) ran successfully on Azure, confirmed by the `silver_transform` task showing Succeeded in `02_databricks_job_run.png` — an assertion failure would have failed that task outright rather than showing green |
-| `06_cost_management.png` | Azure Cost Management — confirmed $0.00 total spend for this project |
-| `07_storage_containers.png` | ADLS Gen2 `healthcarelakehouse01` storage account — `bronze`, `gold`, `landing`, `silver` containers |
+### ADF pipeline run
+![ADF pipeline succeeded](docs/screenshots/01_adf_pipeline_success.png)
+ADF pipeline `pl_healthcare_lakehouse` run, Output tab — `run_healthcare_pipeline` activity Succeeded.
+
+### Databricks Job run
+![Databricks Job run](docs/screenshots/02_databricks_job_run.png)
+Databricks Workflow `healthcare_lakehouse_job` run — all 3 tasks (`bronze_ingest`, `silver_transform`, `gold_aggregate`) succeeded, total duration 3m 21s, running on serverless compute.
+
+### De-identification confirmed
+![De-identification columns](docs/screenshots/03_deidentification_columns.png)
+Output of `patients_scd2.columns` — confirms `SSN`, `FIRST`, `LAST`, `ADDRESS`, `DRIVERS`, `PASSPORT`, `MAIDEN`, `BIRTHPLACE`, `ZIP` are absent from the de-identified table.
+
+### Gold layer output
+![Gold layer output](docs/screenshots/04_gold_output.png)
+Sample rows from `condition_prevalence` — top result "Medication review due (situation)" at 8,858 occurrences across the population.
+
+### Referential integrity
+![Referential integrity check](docs/screenshots/05_referential_integrity.png)
+0 orphaned records across all 6 child tables, full 1,180-patient dataset. Captured on Databricks Free Edition while validating the transform logic prior to Azure deployment; the identical logic (including these same assertion checks) ran successfully on Azure, confirmed by the `silver_transform` task showing Succeeded above — an assertion failure would have failed that task outright rather than showing green.
+
+### Cost — confirmed $0.00
+![Cost management](docs/screenshots/06_cost_management.png)
+Azure Cost Management — confirmed $0.00 total spend for this project.
+
+### Storage layer structure
+![Storage containers](docs/screenshots/07_storage_containers.png)
+ADLS Gen2 `healthcarelakehouse01` storage account — `bronze`, `gold`, `landing`, `silver` containers.
 
 ## Validated run results
 
@@ -111,3 +129,10 @@ data/sample/         Referentially-consistent 200-patient sample of Synthea CSV 
 - **Serverless over classic clusters**: driven by the workspace configuration, not a preference — see "Why a Databricks Job activity" above.
 - **Managed identity over storage keys**: production data paths authenticate via Unity Catalog External Locations backed by an Azure Managed Identity, not embedded account keys.
 - **Cost discipline**: all Azure resources were deleted after evidence capture; confirmed $0.00 total spend for the entire build and validation cycle.
+
+## Author
+
+**Vaibhav Sathe**
+- Email: [vaibhavag0207@gmail.com](mailto:vaibhavag0207@gmail.com)
+- LinkedIn: [linkedin.com/in/vaibhav-sathe-115507194](https://linkedin.com/in/vaibhav-sathe-115507194)
+- Portfolio: [vaibhavsathe.vercel.app](https://vaibhavsathe.vercel.app)
