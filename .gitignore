@@ -1,0 +1,14 @@
+# Synthea output (large, regenerate locally instead of committing)
+output_*/
+*.jar
+
+# Credentials - never commit these
+*.token
+.env
+
+# OS
+.DS_Store
+
+# Python
+__pycache__/
+*.pyc
