@@ -75,7 +75,7 @@ ADF pipeline `pl_healthcare_lakehouse` run, Output tab, `run_healthcare_pipeline
 Databricks Workflow `healthcare_lakehouse_job` run: all 3 tasks (`bronze_ingest`, `silver_transform`, `gold_aggregate`) succeeded, total duration 3m 21s, running on serverless compute.
 
 ### Gold layer output
-![Gold layer output](docs/screenshots/03_gold_layer_output.png)
+![Gold layer output](docs/screenshots/03_deidentification_columns.png)
 Two things confirmed in this notebook output: the `patients_scd2.columns` list shows `SSN`, `FIRST`, `LAST`, `ADDRESS`, `DRIVERS`, `PASSPORT`, `MAIDEN`, `BIRTHPLACE`, and `ZIP` are all absent (de-identification worked), and sample rows from `condition_prevalence` with the top result "Medication review due (situation)" at 8,858 occurrences across the population.
 
 ### Referential integrity
