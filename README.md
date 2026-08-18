@@ -79,15 +79,15 @@ Databricks Workflow `healthcare_lakehouse_job` run: all 3 tasks (`bronze_ingest`
 Two things confirmed in this notebook output: the `patients_scd2.columns` list shows `SSN`, `FIRST`, `LAST`, `ADDRESS`, `DRIVERS`, `PASSPORT`, `MAIDEN`, `BIRTHPLACE`, and `ZIP` are all absent (de-identification worked), and sample rows from `condition_prevalence` with the top result "Medication review due (situation)" at 8,858 occurrences across the population.
 
 ### Referential integrity
-![Referential integrity check](docs/screenshots/04_referential_integrity.png)
+![Referential integrity check](docs/screenshots/05_referential_integrity.png)
 0 orphaned records across all 6 child tables, full 1,180 patient dataset. Captured on Databricks Free Edition while validating the transform logic prior to Azure deployment. The identical logic, including these same assertion checks, ran successfully on Azure, confirmed by the `silver_transform` task showing Succeeded above. An assertion failure would have failed that task outright rather than showing green.
 
 ### Cost, confirmed $0.00
-![Cost management](docs/screenshots/05_cost_management.png)
+![Cost management](docs/screenshots/06_cost_management.png)
 Azure Cost Management, confirmed $0.00 total spend for this project.
 
 ### Storage layer structure
-![Storage containers](docs/screenshots/06_storage_containers.png)
+![Storage containers](docs/screenshots/07_storage_containers.png)
 ADLS Gen2 `healthcarelakehouse01` storage account, `bronze`, `gold`, `landing`, `silver` containers.
 
 ## Validated run results
